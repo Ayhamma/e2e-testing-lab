@@ -1,28 +1,34 @@
-# E2E Testing Lab (Playwright)
-Simple demo app (login + todo) and 4 E2E tests using Playwright.
+# ✅ E2E Testing Lab — Playwright  
+Simple demo web-app (Login + To-Do List) with full End-to-end testing using **Playwright**.
 
-## Run
+---
+
+## 📌 Overview  
+This project is a minimalistic training application for demonstrating **E2E testing principles**.  
+It includes:
+
+- Login form (with credentials validation)  
+- To-Do list (add & delete tasks)  
+- Full Playwright test suite (4 scenarios)  
+- Auto-generated HTML report  
+
+---
+
+## 🚀 Run Locally
+
 ```bash
+# Install dependencies
 npm install
 npx playwright install
-npm start         # open http://localhost:3000
+
+# Start local dev server
+npm start           # opens http://localhost:3000
+
+# Run all tests in visible (headed) browser mode
 npx playwright test --headed
+
+# Generate HTML report
+npx playwright test --reporter=html
+
+# Open HTML report
 npx playwright show-report
-
-Stack
-
-HTML/CSS/JS (vanilla)
-
-http-server
-
-Playwright (@playwright/test)
-
-Tests
-
-Successful login
-
-Wrong password error
-
-Add todo
-
-Delete todo
