@@ -1,0 +1,19 @@
+{
+  "name": "e2e-testing-lab",
+  "version": "1.0.0",
+  "description": "Simple E2E lab with Playwright: login + todos",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "http-server -p 3000",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report"
+  },
+  "author": "Маатук Айхам",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "http-server": "^14.1.1"
+  }
+}

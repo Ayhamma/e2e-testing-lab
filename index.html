@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>To-Do Demo</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 420px; margin: 40px auto; }
+    .hidden { display: none; }
+    input, button { margin: 6px 0; width: 100%; padding: 8px; box-sizing: border-box; }
+    h2 { margin-top: 24px; }
+    ul { list-style: none; padding: 0; margin: 12px 0 0; }
+    li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 8px; }
+    .title { flex: 1; }
+    .del { width: auto; padding: 6px 10px; }
+    #error { color: #c0392b; min-height: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Вход</h2>
+  <div id="login">
+    <input id="email" placeholder="Email" data-testid="email">
+    <input id="password" type="password" placeholder="Пароль" data-testid="password">
+    <button id="loginBtn" data-testid="login-btn">Войти</button>
+    <p id="error" data-testid="login-error"></p>
+  </div>
+
+  <div id="todoApp" class="hidden" data-testid="todo-app">
+    <h2>Список задач</h2>
+    <input id="task" placeholder="Новая задача" data-testid="todo-input">
+    <button id="addBtn" data-testid="todo-add">Добавить</button>
+    <ul id="list" data-testid="todo-list"></ul>
+  </div>
+
+<script>
+  const loginDiv = document.getElementById('login');
+  const todoApp = document.getElementById('todoApp');
+  const error = document.getElementById('error');
+  const list = document.getElementById('list');
+
+  document.getElementById('loginBtn').onclick = () => {
+    const email = document.getElementById('email').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    if (email === "user@test.com" && pass === "1234") {
+      loginDiv.classList.add('hidden');
+      todoApp.classList.remove('hidden');
+      error.textContent = '';
+    } else {
+      error.textContent = "Неверный логин или пароль";
+    }
+  };
+
+  document.getElementById('addBtn').onclick = () => {
+    const taskInput = document.getElementById('task');
+    const task = taskInput.value.trim();
+    if (task) {
+      const li = document.createElement('li');
+      li.setAttribute('data-testid', 'todo-item');
+      li.innerHTML = `
+        <span class="title" data-testid="todo-title"></span>
+        <button class="del" aria-label="Удалить" data-testid="todo-del">Удалить</button>
+      `;
+      li.querySelector('[data-testid="todo-title"]').textContent = task;
+      list.appendChild(li);
+      taskInput.value = '';
+    }
+  };
+
+  // Делегирование клика по списку: удаление задачи
+  list.addEventListener('click', (e) => {
+    if (e.target.classList.contains('del')) {
+      e.target.closest('li')?.remove();
+    }
+  });
+</script>
+</body>
+</html>
